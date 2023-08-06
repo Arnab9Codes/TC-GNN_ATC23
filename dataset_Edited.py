@@ -19,7 +19,7 @@ class TCGNN_dataset(torch.nn.Module):
 
         self.feature = pubmed_util.read_feature_info(path + "/feature/feature.txt")
 
-# check which one to check accuracy for, plus also which to load
+        # check which one to check accuracy for, plus also which to load
         self.train_id = pubmed_util.read_index_info(path + "/index/train_index.txt") #480
         self.test_id = pubmed_util.read_index_info(path + "/index/test_index.txt") #1000
 
@@ -78,80 +78,13 @@ class TCGNN_dataset(torch.nn.Module):
     def init_edges(self, path):
         None
         # loading from a txt graph file
-        '''
-        if self.load_from_txt:
-            fp = open(path, "r")
-            src_li = []
-            dst_li = []
-            start = time.perf_counter()
-            for line in fp:
-                src, dst = line.strip('\n').split()
-                src, dst = int(src), int(dst)
-                src_li.append(src)
-                dst_li.append(dst)
-                self.nodes.add(src)
-                self.nodes.add(dst)
-            
-            self.num_edges = len(src_li)
-            self.num_nodes = max(self.nodes) + 1
-            self.edge_index = np.stack([src_li, dst_li])
-
-            dur = time.perf_counter() - start
-            if self.verbose_flag:
-                print("# Loading (txt) {:.3f}s ".format(dur))
-                
         
-
-        # loading from a .npz graph file
-        else: 
-            
-            if not path.endswith('.npz'):
-                raise ValueError("graph file must be a .npz file")
-
-            start = time.perf_counter()
-            graph_obj = np.load(path)
-            src_li = graph_obj['src_li']
-            dst_li = graph_obj['dst_li']
-
-            self.num_nodes = graph_obj['num_nodes']
-            self.num_edges = len(src_li)
-            self.edge_index = np.stack([src_li, dst_li])
-            dur = time.perf_counter() - start
-            if self.verbose_flag:
-                print("# Loading (npz)(s): {:.3f}".format(dur))
-        
-        self.avg_degree = self.num_edges / self.num_nodes
-        self.avg_edgeSpan = np.mean(np.abs(np.subtract(src_li, dst_li)))
-
-        if self.verbose_flag:
-            print('# nodes: {}'.format(self.num_nodes))
-            print("# avg_degree: {:.2f}".format(self.avg_degree))
-            print("# avg_edgeSpan: {}".format(int(self.avg_edgeSpan)))
-
-        # Build graph CSR.
-        val = [1] * self.num_edges
-        start = time.perf_counter()
-        scipy_coo = coo_matrix((val, self.edge_index), shape=(self.num_nodes, self.num_nodes))
-        scipy_csr = scipy_coo.tocsr()
-        build_csr = time.perf_counter() - start
-
-        if self.verbose_flag:
-            print("# Build CSR (s): {:.3f}".format(build_csr))
-
-        self.column_index = torch.IntTensor(scipy_csr.indices)
-        self.row_pointers = torch.IntTensor(scipy_csr.indptr)
-
-        # Get degrees array.
-        degrees = (self.row_pointers[1:] - self.row_pointers[:-1]).tolist()
-        self.degrees = torch.sqrt(torch.FloatTensor(list(map(func, degrees)))).cuda()
-        '''
 
     def init_embedding(self, dim):
         '''
         Generate node embedding for nodes.
         Called from __init__.
         
-        self.x = torch.randn(self.num_nodes, dim).cuda()
         '''
         None
     
@@ -159,7 +92,6 @@ class TCGNN_dataset(torch.nn.Module):
         '''
         Generate the node label.
         Called from __init__.
-        
-        self.y = torch.ones(self.num_nodes).long().cuda()
+
         '''
         None
