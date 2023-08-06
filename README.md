@@ -1,3 +1,8 @@
+# Our environment to run the code:
+# tc_GCN
+
+original documentation as follows:
+
 # TC-GNN Artifact for USENIX ATC'23.
 
 + **Cite this project and [paper](https://arxiv.org/abs/2112.02052).** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7893174.svg)](https://doi.org/10.5281/zenodo.7893174)
@@ -178,3 +183,7 @@ Zachariadis, O., et. al.
 
 + [**cuSPARSELt**](https://developer.nvidia.com/blog/exploiting-ampere-structured-sparsity-with-cusparselt/?ncid=so-twit-40939#cid=hpc06_so-twit_en-us)<br>
 NVIDIA. **Exploiting NVIDIA Ampere Structured Sparsity with cuSPARSELt**.
+
+
+
+
