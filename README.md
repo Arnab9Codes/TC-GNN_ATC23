@@ -1,5 +1,5 @@
 # Our environment to run the code:
-# tc_GCN
+tc_GCN
 
 original documentation as follows:
 
